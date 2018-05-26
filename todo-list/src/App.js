@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-import "./App.css";
 
 class App extends Component {
   state = {
@@ -26,6 +25,10 @@ formSubmitted = (e) => {
   }))
 
 }
+toggleTodoDone = (e) => {
+  console.log(e.target)
+  this.setState({ done: !this.state.todos.done})
+}
 inputChange = (e) => {
   const text = e.target.value;
   this.setState({ newTodo: text })
@@ -40,7 +43,10 @@ inputChange = (e) => {
           <button type="submit">Submit Todo</button>
         </form>
         <ul>{this.state.todos.map(todo => {
-          return <li key={todo.title}>{todo.title}</li>
+          return ( <li key={todo.title}>
+              <input type="checkbox" onChange={this.toggleTodoDone} checked={this.state.todos.done}/> {todo.title}
+              </li>
+          )
         })}
         </ul>
       </div>
