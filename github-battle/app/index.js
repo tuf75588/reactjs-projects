@@ -1,12 +1,9 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
 require("./index.css");
+var App = require('./components/App.js');
 
 
 
-class App extends React.Component {
-  render() {
-    return <div>Github Battle</div>;
-  }
-}
+
 ReactDOM.render(<App />, document.getElementById('app'));
