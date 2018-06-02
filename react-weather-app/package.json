@@ -1,10 +1,15 @@
 {
   "name": "react-weather-app",
   "version": "1.0.0",
-  "description": "<img src=\"https://tylermcginnis.com/tylermcginnis_glasses-300.png\" width=\"300\" align=\"right\">",
+  "description":
+    "<img src=\"https://tylermcginnis.com/tylermcginnis_glasses-300.png\" width=\"300\" align=\"right\">",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack-dev-server --open",
+    "go": "webpack"
+  },
+  "babel": {
+    "presets": ["env", "react"]
   },
   "author": "",
   "license": "ISC",
@@ -18,5 +23,9 @@
     "style-loader": "^0.21.0",
     "webpack": "^4.10.2",
     "webpack-dev-server": "^3.1.4"
+  },
+  "dependencies": {
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0"
   }
 }
