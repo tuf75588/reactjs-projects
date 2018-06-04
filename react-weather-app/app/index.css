@@ -83,3 +83,8 @@ h1 {
   -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
+.navbar {
+  color: white;
+  padding: 5px;
+  background: rgba(252, 90, 44, 0.89);
+}
