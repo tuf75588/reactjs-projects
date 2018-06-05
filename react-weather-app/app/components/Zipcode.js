@@ -1,31 +1,48 @@
-import React, { Component } from "react";
+var React = require('react');
+var PropTypes = require('prop-types');
 
-class Zipcode extends Component {
+class ZipCode extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      zipcode: ""
+      zipcode: 90210
     };
+  }
+  handleSubmitZipcode () {
+
+  }
+  handleUpdateZipcode () {
+
   }
   render() {
     return (
-      <div className="zipcode-container">
+      <div
+        className='zipcode-container'
+        style={{flexDirection: this.props.direction}}>
         <input
-          type="text"
-          name="zipcode"
-          className="form-control"
-          placeholder="Jenkintown, Pennsylvania"
-        />
+          className='form-control'
+          onChange={this.handleUpdateZipcode}
+          placeholder='St. George, Utah'
+          type='text'
+          value={this.state.zipcode} />
         <button
-          type="button"
-          style={{ margin: 10 }}
-          className="btn btn-success"
-        >
-          Get Weather
+          type='button'
+          style={{margin: 10}}
+          className='btn btn-success'
+          onClick={this.handleSubmitZipcodee}>
+            Get Weather
         </button>
       </div>
-    );
+    )
   }
 }
 
-export default Zipcode;
+ZipCode.defaultProps = {
+  direction: 'column'
+}
+
+ZipCode.propTypes = {
+  direction: PropTypes.string,
+}
+
+module.exports = ZipCode;

@@ -1,21 +1,29 @@
-import React, { Component } from "react";
-import Zipcode from "./Zipcode";
-import Navbar from "./Navbar";
-class App extends Component {
-  render() {
+var React = require('react');
+var ZipCode = require('./ZipCode');
+
+class App extends React.Component {
+  render () {
     return (
-      <div className="container">
-        <Navbar />
-        <div
-          className="home-container"
-          style={{ backgroundImage: "url('app/images/pattern.svg')" }}
-        >
-          <h1 className="header">Enter a City and State</h1>
-          <Zipcode />
+      <div className='container'>
+        <div className='navbar'>
+          <h1>Clever Title</h1>
+          <ZipCode
+            direction='row'
+            onSubmitZipcode={function(){}}
+            onUpdateZipcode={function(){}}
+            zipcode={123} />
+        </div>
+        <div className='home-container' style={{backgroundImage: "url('app/images/pattern.svg')"}}>
+          <h1 className='header'>Enter a City and State</h1>
+          <ZipCode
+            direction='column'
+            onSubmitZipcode={function(){}}
+            onUpdateZipcode={function(){}}
+            zipcode={123} />
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+module.exports = App;
