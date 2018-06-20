@@ -25,7 +25,7 @@ class PlayerInput extends React.Component {
   render() {
     return (
       <form className="column" onSubmit={this.handleSubmit}>
-        <label className='header' htmlFor="username">{this.props.lable}</label>
+        <label className='header' htmlFor="username">{this.props.label}</label>
         <input
           type="text"
           id="username"
@@ -47,7 +47,7 @@ class PlayerInput extends React.Component {
 }
 PlayerInput.propTypes = {
   id: PropTypes.string.isRequired,
-  lable: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired
 };
 
@@ -80,17 +80,21 @@ class Battle extends React.Component {
           {!playerOneName && (
             <PlayerInput
               id="playerOne"
-              lable="Player One"
+              label="Player One"
               onSubmit={this.handleSubmit}
             />
           )}
           {!playerTwoName && (
             <PlayerInput
               id="playerTwo"
-              lable="Player Two"
+              label="Player Two"
               onSubmit={this.handleSubmit}
             />
           )}
+          <div>
+            {playerTwoName}
+            <img style={{display:'block'}}src={this.state.playerTwoImage}/>
+          </div>
         </div>
       </div>
     );
