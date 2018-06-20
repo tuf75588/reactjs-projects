@@ -10,25 +10,22 @@ class PlayerInput extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleSubmit(event) {
-    event.preventDefault()
-    this.props.onSubmit(
-        this.props.id,
-        this.state.username,
-    )
-  }
-  handleChange(e) {
-    var target = e.target.value;
+  handleChange(event) {
+    var value = event.target.value;
     this.setState(function() {
       return {
-        username: target
+        username: value
       };
     });
+  }
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.onSubmit(this.props.id, this.state.username);
   }
   render() {
     return (
       <form className="column" onSubmit={this.handleSubmit}>
-        <label htmlFor="username">{this.props.lable}</label>
+        <label className='header' htmlFor="username">{this.props.lable}</label>
         <input
           type="text"
           id="username"
@@ -63,13 +60,16 @@ class Battle extends React.Component {
       playerOneImage: null,
       playerTwoImage: null
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleSubmit(id,username) {
-      var newState = {};
-      newState[id + 'Name'] = username;
-      newState[id + 'Image'] = 'https://github.com/' + username + '.png?size=200';
-      return newState
-  } 
+  handleSubmit(id, username) {
+      this.setState(function() {
+        var newState = {};
+        newState[id + 'Name'] = username;
+        newState[id + 'Image'] = 'https://github.com/' + username + '.png?size=200'
+        return newState
+      })
+  }
 
   render() {
     var playerOneName = this.state.playerOneName;
