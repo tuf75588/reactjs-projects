@@ -15,6 +15,6 @@
     "live-server": "git://github.com/acco/live-server.git"
   },
   "dependencies": {
-    "semantic-ui": "2.2.10"
+    "semantic-ui": "^2.3.2"
   }
 }
