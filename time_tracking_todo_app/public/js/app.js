@@ -112,7 +112,9 @@ class Timer extends React.Component {
             </span>
           </div>
         </div>
-        <div className="ui bottom attached blue basic button" />
+        <div className="ui bottom attached blue basic button">Start
+        </div>
+        
       </div>
     );
   }
