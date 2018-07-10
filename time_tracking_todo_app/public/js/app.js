@@ -1,12 +1,30 @@
 //build out static version of app
 
 class TimerDashboard extends React.Component {
+  state = {
+    timers: [
+      {
+        title: "Practice Quest",
+        project: "Gym Chores",
+        id: uuid.v4(),
+        elapsed: 5456099,
+        runningSince: Date.now()
+      },
+      {
+        title: "Bake squash",
+        project: "kitchen chores",
+        id: uuid.v4(),
+        elapsed: 1273998,
+        runningSince: null
+      }
+    ]
+  };
   render() {
     return (
       <div className="ui three column centered grid">
         <div className="column">
-          <EditableTimerList />
-          <ToggableTimerForm isOpen={true} />
+          <EditableTimerList timers={this.state.timers} />
+          <ToggableTimerForm />
         </div>
       </div>
     );
@@ -14,24 +32,17 @@ class TimerDashboard extends React.Component {
 }
 class EditableTimerList extends React.Component {
   render() {
-    return (
-      <div id="timers">
-        <EditableTimer
-          title="Learn React"
-          project="Web Domination"
-          elapsed="8986300"
-          runningSince={null}
-          editFormOpen={false}
-        />
-        <EditableTimer
-          title="Learn Extreme Ironing"
-          project="World Domination"
-          elapsed="3890985"
-          runningSince={null}
-          editFormOpen={true}
-        />
-      </div>
-    );
+    const timers = this.props.timer(time => (
+      <EditableTimer
+        key={timer.id}
+        id={timer.id}
+        title={timer.title}
+        project={timer.project}
+        elapsed={timer.elsapsed}
+        runningSince={timer.runningSince}
+      />
+    ));
+    return <div id="timers">{timers}</div>;
   }
 }
 class EditableTimer extends React.Component {
@@ -112,9 +123,7 @@ class Timer extends React.Component {
             </span>
           </div>
         </div>
-        <div className="ui bottom attached blue basic button">Start
-        </div>
-        
+        <div className="ui bottom attached blue basic button">Start</div>
       </div>
     );
   }
