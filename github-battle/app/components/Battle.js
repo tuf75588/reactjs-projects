@@ -1,34 +1,9 @@
 var React = require("react");
 var PropTypes = require("prop-types");
 var Link = require("react-router-dom").Link;
-var getProfile = require('../utils/api').getProfile;
-function PlayerPreview(props) {
-  return (
-    <div>
-      <div className="column">
-        <img
-          src={props.avatar}
-          className="avatar"
-          alt={"avatar for" + props.username}
-        />
-        <h2>@{props.username}</h2>
-      </div>
-      <button
-        className="reset"
-        type="submit"
-        onClick={props.onReset.bind(null, props.id)}
-      >
-        Reset
-      </button>
-    </div>
-  );
-}
-PlayerPreview.propTypes = {
-  avatar: PropTypes.string,
-  username: PropTypes.string.isRequired,
-  onReset: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired
-};
+var getProfile = require("../utils/api").getProfile;
+var PlayerPreview = require("./PlayerPreview");
+
 class PlayerInput extends React.Component {
   constructor(props) {
     super(props);
@@ -133,8 +108,15 @@ class Battle extends React.Component {
               id="playerOne"
               username={playerOneName}
               avatar={playerOneImage}
-              onReset={this.handleReset}
-            />
+            >
+              <button
+                className="reset"
+                type="submit"
+                onClick={this.handleReset.bind(null, 'playerOne')}
+              >
+                Reset
+              </button>
+            </PlayerPreview>
           )}
           {!playerTwoName && (
             <PlayerInput
@@ -148,8 +130,15 @@ class Battle extends React.Component {
               id="playerTwo"
               username={playerTwoName}
               avatar={playerTwoImage}
-              onReset={this.handleReset}
-            />
+            >
+              <button
+                className="reset"
+                type="submit"
+                onClick={this.handleReset.bind(null, 'playerTwo')}
+              >
+                Reset
+              </button>
+            </PlayerPreview>
           )}
         </div>
         <div>
