@@ -30,8 +30,18 @@ function getCurrentWeather(city) {
     console.log(res);
   })
 }
+function getForecast(city) {
+  const queryStringData = getQueryStringData(city);
+  const url = prepURL('forecast/daily', queryStringData)
+  return fetch(url).then(response => {
+    return response.json();
+  }).then(res => {
+    return res;
+  })
+}
 module.exports = {
-  getCurrentWeather: getCurrentWeather
+  getCurrentWeather: getCurrentWeather,
+  getForecast: getForecast
 }
 
 

@@ -19,8 +19,8 @@ class App extends React.Component {
                     onSubmitZipcode={function(city) {
                       props.history.push({
                         pathname: "forecast",
-                        search: "?city" + city,
-                        state: { msg: "new state" }
+                        search: "?city=" + city,
+                        
                       });
                     }}
                     zipcode={123}
@@ -45,7 +45,6 @@ class App extends React.Component {
                       props.history.push({
                         pathname: "forecast",
                         search: "?city" + city,
-                        state: { msg: "new state" }
                       });
                     }}
                     zipcode={123}
