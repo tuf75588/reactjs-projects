@@ -1,9 +1,10 @@
-var React = require("react");
-var ZipCode = require("./ZipCode");
-var Forecast = require("./Forecast");
-var ReactRouter = require("react-router-dom");
-var Route = ReactRouter.Route;
-var BrowserRouter = ReactRouter.BrowserRouter;
+var React = require('react')
+var ZipCode = require('./ZipCode')
+var Forecast = require('./Forecast')
+var Detail = require('./Detail')
+var ReactRouter = require('react-router-dom')
+var Route = ReactRouter.Route
+var BrowserRouter = ReactRouter.BrowserRouter
 class App extends React.Component {
   render() {
     return (
@@ -18,15 +19,14 @@ class App extends React.Component {
                     direction="row"
                     onSubmitZipcode={function(city) {
                       props.history.push({
-                        pathname: "forecast",
-                        search: "?city=" + city,
-                        
-                      });
+                        pathname: 'forecast',
+                        search: '?city=' + city,
+                      })
                     }}
                     zipcode={123}
                   />
                 </div>
-              );
+              )
             }}
           />
           <Route
@@ -36,28 +36,29 @@ class App extends React.Component {
               return (
                 <div
                   className="home-container"
-                  style={{ backgroundImage: "url('app/images/pattern.svg')" }}
+                  style={{backgroundImage: "url('app/images/pattern.svg')"}}
                 >
                   <h1 className="header">Enter a City and State</h1>
                   <ZipCode
                     direction="column"
                     onSubmitZipcode={function(city) {
                       props.history.push({
-                        pathname: "forecast",
-                        search: "?city" + city,
-                      });
+                        pathname: 'forecast',
+                        search: '?city' + city,
+                      })
                     }}
                     zipcode={123}
                   />
                 </div>
-              );
+              )
             }}
           />
           <Route path="/forecast" component={Forecast} />
+          <Route path="/details/:city" component={Detail} />
         </div>
       </BrowserRouter>
-    );
+    )
   }
 }
 
-module.exports = App;
+module.exports = App
