@@ -1,11 +1,14 @@
-import React, {Component} from 'react'
-
+import React, { Component } from 'react'
+import { getWeather } from '../utils/api'
 class Zipcode extends Component {
+  state = {
+    zipcode: '',
+  }
   render() {
     return (
       <div
         className="zipcode-container"
-        style={{flexDirection: this.props.direction}}
+        style={{ flexDirection: this.props.direction }}
       >
         <input
           type="text"
