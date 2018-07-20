@@ -1,5 +1,5 @@
-const _baseURL = ' api.openweathermap.org/data/2.5/'
-const APP_ID = '40e258beb3a60f7086ad5315f406a452'
+const _baseURL = 'http://api.openweathermap.org/data/2.5/'
+const APP_ID = '53db7473f1e7afdfedf1933722fa5390'
 
 function prepRouteParams(getQueryStringData) {
   return Object.keys(getQueryStringData)
@@ -13,22 +13,27 @@ function getQueryStringData(city) {
   return {
     q: city,
     type: 'accurate',
-    cnt: 5,
     APPID: APP_ID,
+    cnt: 5,
   }
 }
 function buildURL(type, queryStringData) {
-  return `${_baseURL}${type}/${prepRouteParams(queryStringData)}&units=imperial`
+  return `${_baseURL}${type}/?${prepRouteParams(
+    queryStringData,
+  )}&units=imperial`
 }
-const data = getQueryStringData('jenkintown')
-const url = buildURL('weather', data)
-function getWeather(city) {
+
+export function getWeather(city) {
   const queryStringData = getQueryStringData(city)
   const url = buildURL('weather', queryStringData)
+  return url
+}
+export function getForecast(city) {
+  const queryStringData = getQueryStringData(city)
+  const url = buildURL('forecast', queryStringData)
   return fetch(url)
     .then(res => res.json())
     .then(data => {
-      console.log(data)
+      return data
     })
 }
-export default getWeather

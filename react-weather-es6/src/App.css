@@ -23,7 +23,7 @@ body {
   align-items: center;
   background-size: cover;
   flex-direction: column;
-  background-image: url('images/pattern.svg');
+  background-image: url('/images/pattern.svg');
 }
 .navbar {
   background: rgba(252, 90, 44, 0.89);
@@ -83,4 +83,33 @@ body {
   color: #fff;
   background-color: #5cb85c;
   border-color: #4cae4c;
+}
+.weather {
+  height: 130px;
+}
+.forecast-container {
+  display: flex;
+
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  max-width: 1200px;
+  margin: 50px auto;
+}
+.dayContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: 35px;
+}
+.subheader {
+  font-size: 30px;
+  color: #333;
+  font-weight: 100;
+}
+.forecast-header {
+  text-align: center;
+  font-weight: 100;
+  font-size: 65px;
 }

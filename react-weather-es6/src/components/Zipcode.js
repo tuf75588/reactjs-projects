@@ -4,6 +4,15 @@ class Zipcode extends Component {
   state = {
     zipcode: '',
   }
+  handleSubmit = () => {
+    this.props.handleSubmitZip(this.state.zipcode)
+  }
+  handleZipChange = event => {
+    const val = event.target.value
+    this.setState(() => ({
+      zipcode: val,
+    }))
+  }
   render() {
     return (
       <div
@@ -14,8 +23,11 @@ class Zipcode extends Component {
           type="text"
           className="form-control"
           placeholder="Philadelphia, Pennsylvania"
+          onChange={this.handleZipChange}
         />
-        <button className="btn btn-success">Get Weather!</button>
+        <button className="btn btn-success" onClick={this.handleSubmit}>
+          Get Weather!
+        </button>
       </div>
     )
   }
