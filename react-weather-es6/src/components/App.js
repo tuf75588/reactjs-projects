@@ -1,45 +1,48 @@
 import React, { Component } from 'react'
-import '../App.css'
-import ZipCode from './Zipcode'
-import Forecast from './Forecast'
-import { BrowserRouter, Route } from 'react-router-dom'
+import styled from 'styled-components'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import Header from '../components/Header/Header'
+import Home from '../components/Home/Home'
+const Background = styled.div`
+  /* background: url('/images/pattern.svg'); */
+  height: 100vh;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 10px;
+`
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
-        <div className="container">
+      <Router>
+        <Background>
           <Route
             render={props => (
-              <div className="navbar">
-                <h1 className="header">React Weather Application</h1>
-                <ZipCode
-                  direction="row"
-                  handleSubmitZip={city =>
-                    props.history.push({
-                      pathname: 'forecast',
-                      search: `?city=${city}`,
-                    })
-                  }
-                />
-              </div>
+              <Header
+                submitLocation={city =>
+                  props.history.push({
+                    pathname: '/forecast',
+                    search: `?city=${city}`,
+                  })
+                }
+              />
             )}
           />
           <Route
             exact
             path="/"
             render={props => (
-              <div className="home-container">
-                <h1 className="header">Please Enter A city</h1>
-                <ZipCode
-                  direction="column"
-                  handleSubmitZip={this.handleSubmitZip}
-                />
-              </div>
+              <Home
+                submitLocation={city =>
+                  props.history.push({
+                    pathname: '/forecast',
+                    search: `?city=${city}`,
+                  })
+                }
+              />
             )}
           />
-          <Route path="/forecast" component={Forecast} />
-        </div>
-      </BrowserRouter>
+        </Background>
+      </Router>
     )
   }
 }

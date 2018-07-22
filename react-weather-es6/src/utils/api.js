@@ -1,39 +1,28 @@
 const _baseURL = 'http://api.openweathermap.org/data/2.5/'
-const APP_ID = '53db7473f1e7afdfedf1933722fa5390'
+const _API_KEY = 'b714ec74bbab5650795063cb0fdf5fbe'
 
-function prepRouteParams(getQueryStringData) {
-  return Object.keys(getQueryStringData)
-    .map(element => {
-      return `${element}=${encodeURIComponent(getQueryStringData[element])}`
-    })
-    .join('&')
+const api = {
+  currentWeather: location =>
+    `${_baseURL}weather?q=${location}&type=accurate&APPID=${_API_KEY}`,
+  forecast: location =>
+    `${_baseURL}forecast/daily?q=${location}&type=accurate&APPID=${_API_KEY}`,
 }
-
-function getQueryStringData(city) {
-  return {
-    q: city,
-    type: 'accurate',
-    APPID: APP_ID,
-    cnt: 5,
-  }
+const apiMethods = {
+  fetchCurrentWeather: function(location) {
+    const encodeURI = window.encodeURI(api.currentWeather(location))
+    return fetch(encodeURI)
+      .then(res => res.json())
+      .then(res => {
+        return res.data
+      })
+  },
+  fetchCurrentForecast: function(location) {
+    const encodeURI = window.encodeURI(api.forecast(location))
+    return fetch(encodeURI)
+      .then(res => res.json())
+      .then(res => {
+        return res.data
+      })
+  },
 }
-function buildURL(type, queryStringData) {
-  return `${_baseURL}${type}/?${prepRouteParams(
-    queryStringData,
-  )}&units=imperial`
-}
-
-export function getWeather(city) {
-  const queryStringData = getQueryStringData(city)
-  const url = buildURL('weather', queryStringData)
-  return url
-}
-export function getForecast(city) {
-  const queryStringData = getQueryStringData(city)
-  const url = buildURL('forecast', queryStringData)
-  return fetch(url)
-    .then(res => res.json())
-    .then(data => {
-      return data
-    })
-}
+export default apiMethods

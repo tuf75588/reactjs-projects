@@ -23,9 +23,16 @@ const monthsMap = {
   '11': 'Dec',
 }
 
-export function getDate(unixTimeStamp) {
-  const date = new Date(unixTimeStamp * 1000)
-  const day = daysMap[date.getDay()]
-  const month = `${monthsMap[date.getMonth()]}${date.getDate()}`
-  return `${day}, ${month}`
+function convertTemp(kelvin) {
+  return parseInt((kelvin - 273.15) * 1.8 + 32.0, 10)
 }
+
+function getDate(unixTimestmap) {
+  const timestamp = new Date(unixTimestmap * 1000)
+  const day = daysMap[timestamp.getDay()]
+  const date = timestamp.getDate()
+  const month = monthsMap[timestamp.getMonth()]
+  return `${day}, ${month} ${date}`
+}
+
+export { convertTemp, getDate }
