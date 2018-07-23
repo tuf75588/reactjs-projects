@@ -1,15 +1,22 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import Header from '../components/Header/Header'
-import Home from '../components/Home/Home'
+import styled from 'styled-components'
+
+import Header from './Header/Header'
+import Home from './Home/Home'
+import Forecast from './Forecast/Forecast'
+import Details from './Forecast/Details'
+// import NotFound from "./NotFound/NotFound";
+// import pattern from "../images/pattern.svg";
+
 const Background = styled.div`
-  /* background: url('/images/pattern.svg'); */
+  // background: url('/images/pattern.svg');
   height: 100vh;
   max-width: 800px;
   margin: 0 auto;
   padding: 0 10px;
 `
+
 class App extends Component {
   render() {
     return (
@@ -41,6 +48,9 @@ class App extends Component {
               />
             )}
           />
+          <Route path="/forecast" component={Forecast} />
+          <Route path="/details/:city" component={Details} />
+          {/* <Route component={NotFound} /> */}
         </Background>
       </Router>
     )

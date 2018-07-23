@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+
 import LocationContainer from '../LocationContainer/LocationContainer'
-import PropTypes from 'prop-types'
+
 const HeaderWrapper = styled.div`
   background-color: white;
   font-size: 30px;
@@ -14,17 +16,23 @@ const HeaderWrapper = styled.div`
     flex-direction: row;
   }
 `
+
 const Title = styled(Link)`
   text-decoration: none;
   color: orangered;
 `
-const Header = props => (
-  <HeaderWrapper>
-    <Title to="/">Weather Forecast</Title>
-    <LocationContainer submitLocation={props.submitLocation} />
-  </HeaderWrapper>
-)
+
+const Header = props => {
+  return (
+    <HeaderWrapper>
+      <Title to="/">Weather Forecast</Title>
+      <LocationContainer submitLocation={props.submitLocation} />
+    </HeaderWrapper>
+  )
+}
+
 Header.propTypes = {
   submitLocation: PropTypes.func.isRequired,
 }
+
 export default Header

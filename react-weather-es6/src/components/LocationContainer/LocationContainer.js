@@ -1,17 +1,20 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+
 const Layout = styled.div`
   display: flex;
   flex-direction: ${props => (props.column ? 'column' : 'row')};
   align-items: center;
 `
+
 const Input = styled.input`
   padding: 6px;
   border-radius: 5px;
   box-shadow: blanchedalmond;
   border: 1px solid #dedede;
 `
+
 const Button = styled.button`
   margin: 10px;
   background-color: #5cb85c;
@@ -22,41 +25,58 @@ const Button = styled.button`
   color: white;
   cursor: pointer;
 `
+
 class LocationContainer extends Component {
-  state = {
-    location: '',
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      location: '',
+    }
+
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
-  handleChange = e => {
-    const val = e.target.value
+
+  handleChange(e) {
+    const inputValue = e.target.value
+
     this.setState((prevState, props) => {
       return {
-        location: val,
+        location: inputValue,
       }
     })
   }
-  handleSubmit = e => {
+
+  handleSubmit(e) {
     e.preventDefault()
+
     this.props.submitLocation(this.state.location)
-    this.setState((prevState, props) => ({
-      location: '',
-    }))
+
+    this.setState((prevState, props) => {
+      return {
+        location: '',
+      }
+    })
   }
+
   render() {
     return (
       <Layout column={this.props.column}>
-        <form action="" onSubmit={this.handleSubmit}>
-          <input
+        <form onSubmit={this.handleSubmit}>
+          <Input
             type="text"
             value={this.state.location}
+            placeholder="ex: Irvine, CA"
             onChange={this.handleChange}
-            placeholder="Philadelphia PA"
           />
-          <Button>Get Weather Forecast</Button>
+          <Button>Get Forecast</Button>
         </form>
       </Layout>
     )
   }
 }
+
 LocationContainer.propTypes = {
   submitLocation: PropTypes.func.isRequired,
   column: PropTypes.bool,

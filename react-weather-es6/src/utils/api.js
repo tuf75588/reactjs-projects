@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const _baseURL = 'http://api.openweathermap.org/data/2.5/'
 const _API_KEY = 'b714ec74bbab5650795063cb0fdf5fbe'
 
@@ -10,19 +12,15 @@ const api = {
 const apiMethods = {
   fetchCurrentWeather: function(location) {
     const encodeURI = window.encodeURI(api.currentWeather(location))
-    return fetch(encodeURI)
-      .then(res => res.json())
-      .then(res => {
-        return res.data
-      })
+    return axios.get(encodeURI).then(currentWeatherData => {
+      return currentWeatherData.data
+    })
   },
-  fetchCurrentForecast: function(location) {
+  fetchForecast: function(location) {
     const encodeURI = window.encodeURI(api.forecast(location))
-    return fetch(encodeURI)
-      .then(res => res.json())
-      .then(res => {
-        return res.data
-      })
+    return axios.get(encodeURI).then(forecast => {
+      return forecast.data
+    })
   },
 }
 export default apiMethods
