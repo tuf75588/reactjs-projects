@@ -1,36 +1,32 @@
-var path = require("path");
-var HtmlWebpackPlugin = require("html-webpack-plugin");
+var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var webpack = require('webpack');
 //NODE_ENV to production
 
 //uglify
 
-
-
 var config = {
-  entry: ["./app/index.js"],
+  entry: ['babel-polyfill', './app/index.js'],
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "index_bundle.js",
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'index_bundle.js',
     publicPath: '/'
   },
   module: {
     rules: [
-      { test: /\.(js)$/, use: "babel-loader" },
-      { test: /\.css$/, use: [ 'style-loader', 'css-loader' ]}
+      { test: /\.(js)$/, use: 'babel-loader' },
+      { test: /\.css$/, use: ['style-loader', 'css-loader'] }
     ]
   },
   devServer: {
-    historyApiFallback: true,
+    historyApiFallback: true
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "app/index.html"
+      template: 'app/index.html'
     })
   ],
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development'
 };
-
-
 
 module.exports = config;
