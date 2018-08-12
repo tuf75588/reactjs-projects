@@ -1,0 +1,89 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #fffff2;
+}
+button {
+  font-size: 22px;
+  padding: 10px 15px 10px 15px;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Trirong', serif;
+  background: rgba(39, 41, 50, 0.95);
+  color: #fffff2;
+}
+span {
+  display: inline;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.container h3 {
+  font-weight: 400;
+  font-size: 2em;
+}
+.submitBtn {
+  margin-left: 8px;
+}
+.inputBox {
+  font-size: 22px;
+  width: 350px;
+  padding: 10px;
+  border: 1px solid rgba(39, 41, 50, 0.15);
+  border-radius: 3px;
+}
+.randomBtn {
+  margin-top: 15px;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+.counter {
+  margin-left: 7px;
+  margin-top: -5px;
+  font-size: 20px;
+}
+input[type='range'] {
+  width: 300px;
+  height: 5px;
+  margin-bottom: 3px;
+
+  border: none;
+  border-radius: 3px;
+}
+.resultsContainer {
+  padding: 15px;
+}
+.titleHead {
+  width: 150px;
+  text-align: right;
+  padding-left: 10px;
+}
+.infoHead {
+  padding-left: 25px;
+}
+table {
+  display: block;
+}
+.titleCol,
+.infoCol {
+  width: 150px;
+  padding-right: 10px;
+  text-align: right;
+  font-size: 22px;
+  font-family: 'Ubuntu', sans-serif;
+  color: #191919;
+  background: rgba(39, 41, 50, 0.05);
+  border: 1px solid rgba(39, 41, 50, 0.1);
+}
+.resultBox .infoCol {
+  text-align: left;
+  background: rgba(39, 41, 50, 0.95);
+  border: 1px solid rgba(250, 250, 250, 0.1);
+  color: #fffff2;
+  font-family: 'Trirong', serif;
+  padding-left: 15px;
+  padding-right: 15px;
+}
