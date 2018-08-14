@@ -44,8 +44,15 @@ class App extends Component {
         return data.json();
       })
       .then(response => {
+        const titles = response[1];
+        const snippets = response[2];
+        const urls = response[3];
         this.setState(() => ({
-          data: response
+          data: {
+            titles,
+            snippets,
+            urls
+          }
         }));
       });
   };
@@ -80,7 +87,7 @@ class App extends Component {
           <div className="rangeSection">
             <input
               min="3"
-              max="50"
+              max="15"
               type="range"
               onChange={this.handleRangeChange}
             />
@@ -88,9 +95,11 @@ class App extends Component {
           </div>
         </div>
         <ResultsSection
-          data={this.state.data}
+          snippets={this.state.data.snippets}
+          titles={this.state.data.titles}
           display={this.state.tableDisplay}
           count={this.state.count}
+          data={this.state.data}
         />
       </div>
     );
@@ -98,11 +107,9 @@ class App extends Component {
 }
 
 function ResultsSection(props) {
-  const wikis = props.data.slice(0, props.count);
-  const titles = wikis[1];
-  const snippets = wikis[2];
-  const urls = props.data[3];
-  console.log(titles, snippets, urls);
+  const titles = { ...props.titles };
+  console.log(titles);
+
   const tableHeadStyle = {
     display: props.tableDisplay
   };
