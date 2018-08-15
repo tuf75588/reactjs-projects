@@ -37,22 +37,24 @@ class App extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    return fetch(
-      `${_baseURL}&search=${this.state.searchTerm}&limit=${this.state.count}`
-    )
+    return fetch(`${_baseURL}&search=${this.state.searchTerm}&limit=50`)
       .then(data => {
         return data.json();
       })
       .then(response => {
+        console.log(response);
         const titles = response[1];
         const snippets = response[2];
         const urls = response[3];
+        let data = [];
+        for (let i = 0; i < 50; i++) {
+          data[i] = [response[1][i], response[2][i], response[3][i]];
+        }
+
         this.setState(() => ({
-          data: {
-            titles,
-            snippets,
-            urls
-          }
+          data,
+          searchTerm: '',
+          tableDisplay: 'block'
         }));
       });
   };
@@ -87,7 +89,7 @@ class App extends Component {
           <div className="rangeSection">
             <input
               min="3"
-              max="15"
+              max="50"
               type="range"
               onChange={this.handleRangeChange}
             />
@@ -95,8 +97,6 @@ class App extends Component {
           </div>
         </div>
         <ResultsSection
-          snippets={this.state.data.snippets}
-          titles={this.state.data.titles}
           display={this.state.tableDisplay}
           count={this.state.count}
           data={this.state.data}
@@ -107,9 +107,16 @@ class App extends Component {
 }
 
 function ResultsSection(props) {
-  const titles = { ...props.titles };
-  console.log(titles);
-
+  console.log(props);
+  const data = props.data.slice(0, props.count);
+  const results = props.data
+    ? data.map((item, key) => (
+        <tr className="resultBox">
+          <td className="titleCol">{item[0]}</td>
+          <td className="infoCol">{item[1]}</td>
+        </tr>
+      ))
+    : '';
   const tableHeadStyle = {
     display: props.tableDisplay
   };
@@ -123,6 +130,7 @@ function ResultsSection(props) {
           <th className="infoHead">Snippet (click to view article)</th>
         </tr>
       </table>
+      <table>{results}</table>
     </div>
   );
 }
