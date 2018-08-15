@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled, { css } from 'react-emotion';
+import { Link, BrowserRouter as Router } from 'react-router-dom';
 const _baseURL =
   'https://en.wikipedia.org/w/api.php?action=opensearch&origin=*&format=json';
 
@@ -64,6 +65,9 @@ class App extends Component {
       searchTerm: val
     }));
   };
+  openLink(value) {
+    window.open(value);
+  }
   render() {
     return (
       <div className="App">
@@ -83,7 +87,13 @@ class App extends Component {
             </button>
           </form>
 
-          <button type="submit" className="randomBtn">
+          <button
+            type="submit"
+            className="randomBtn"
+            onClick={() =>
+              window.open('https://en.wikipedia.org/wiki/Special:Random')
+            }
+          >
             Or Generate a random article
           </button>
           <div className="rangeSection">
@@ -100,6 +110,7 @@ class App extends Component {
           display={this.state.tableDisplay}
           count={this.state.count}
           data={this.state.data}
+          openLink={this.openLink}
         />
       </div>
     );
@@ -111,7 +122,7 @@ function ResultsSection(props) {
   const data = props.data.slice(0, props.count);
   const results = props.data
     ? data.map((item, key) => (
-        <tr className="resultBox">
+        <tr className="resultBox" onClick={props.openLink.bind(null, item[2])}>
           <td className="titleCol">{item[0]}</td>
           <td className="infoCol">{item[1]}</td>
         </tr>

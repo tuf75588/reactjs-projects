@@ -94,3 +94,10 @@ table {
 .resultBox td {
   padding: 10px 5px 10px 5px;
 }
+.resultBox .infoCol:hover {
+  cursor: pointer;
+  background: rgba(39, 41, 50, 0.85);
+}
+input[type='range']:focus {
+  outline: none;
+}
