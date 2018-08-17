@@ -11,18 +11,20 @@ class Products extends Component {
         return res.json();
       })
       .then(response => {
-        this.setState(() => ({
-          products: response,
-          isLoading: false
-        }));
+        setTimeout(() => {
+          this.setState(() => ({
+            products: response,
+            isLoading: false
+          }));
+        }, 700);
       });
   }
   render() {
     return (
       <div>
         <h1>Products Page..</h1>
-        {this.state.loading ? (
-          <h2>Loading Products..</h2>
+        {this.state.loading === true ? (
+          <h1>Loading Products....</h1>
         ) : (
           this.state.products.map((product, key) => (
             <ul key={product.title}>
