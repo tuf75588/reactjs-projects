@@ -1,36 +1,40 @@
 import React, { Component } from 'react';
-
+import Product from '../components/Product';
+import { getProducts } from '../API';
 class Products extends Component {
   state = {
     isLoading: true,
     products: []
   };
   componentDidMount() {
-    return fetch('http://localhost:5000/api/v1/products')
-      .then(res => {
-        return res.json();
-      })
-      .then(response => {
-        setTimeout(() => {
-          this.setState(() => ({
-            products: response,
-            isLoading: false
-          }));
-        }, 700);
-      });
+    getProducts().then(response => {
+      setTimeout(() => {
+        this.setState(() => ({
+          products: response,
+          isLoading: false
+        }));
+      }, 700);
+    });
   }
   render() {
+    const { url } = this.props.match;
+
     return (
       <div>
-        <h1>Products Page..</h1>
-        {this.state.loading === true ? (
-          <h1>Loading Products....</h1>
+        {this.state.isLoading ? (
+          <h2>Loading products...</h2>
         ) : (
-          this.state.products.map((product, key) => (
-            <ul key={product.title}>
-              <li>{product.title}</li>
-            </ul>
-          ))
+          <div className="row">
+            {this.state.products.map(product => (
+              <Product
+                key={product.id}
+                details={product}
+                cols="col-4"
+                path={this.props.location.pathname}
+                showStock={false}
+              />
+            ))}
+          </div>
         )}
       </div>
     );
