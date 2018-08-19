@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import Product from '../components/Product';
-import { getProducts } from '../API';
+import React, { Component } from "react";
+import Product from "../components/Product";
+import { getProducts } from "../API";
 class Products extends Component {
   state = {
     isLoading: true,
@@ -28,7 +28,7 @@ class Products extends Component {
             {this.state.products.map(product => (
               <Product
                 key={product.id}
-                details={product}
+                product={product}
                 cols="col-4"
                 path={this.props.location.pathname}
                 showStock={false}

@@ -1,46 +1,34 @@
-import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-//dynamically changing the url based on the current path
-//pass state of products component through to product and then to ViewProduct
-const Product = props => {
-  const { details, showStock } = props;
-  const linkText = props.path === '/products' ? 'View Product' : 'Edit Product';
-  const location = {
-    pathname: `${props.path}/${details.id}`,
-    state: {
-      details
-    }
-  };
-  const editLocation = {
-    pathname: '/products/create',
-    state: {
-      details
-    }
-  };
-  return (
-    <div className={`card ${props.cols}`}>
-      <img className="card-img-top" src={details.image} alt="Card image cap" />
-      <div className="card-body">
-        <h5 className="card-title">{details.title}</h5>
-        <p className="card-text">{details.description}</p>
-        <p className="card-text">${details.price}</p>
-        {showStock ? (
-          <p className="card-text">{details.quantity} in stock</p>
-        ) : (
-          ''
-        )}
-        <Link
-          to={props.path === '/products' ? location : editLocation}
-          className={
-            props.path === '/products' ? 'btn btn-primary' : 'btn btn-danger'
-          }
-        >
-          {linkText}
+const Product = ({ product, cols, showStock, editing, deleteProduct }) => (
+  <div className={`card ${cols}`}>
+    <img className="card-img-top" src={product.image} alt={product.title} />
+    <div className="card-body">
+      <h5 className="card-title">{product.title}</h5>
+      <p className="card-text">{product.description}</p>
+      <p className="card-text">${product.price}</p>
+      {showStock ? (
+        <p className="card-text">{product.quantity} in stock</p>
+      ) : (
+        ""
+      )}
+      {editing ? (
+        <div>
+          <Link to={`/products/${product.id}/edit`} className="btn btn-info">
+            Edit Product
+          </Link>
+          <button onClick={deleteProduct} className="btn btn-danger">
+            Delete Product
+          </button>
+        </div>
+      ) : (
+        <Link to={`/products/${product.id}`} className="btn btn-primary">
+          View Product
         </Link>
-      </div>
+      )}
     </div>
-  );
-};
+  </div>
+);
 
 export default Product;
