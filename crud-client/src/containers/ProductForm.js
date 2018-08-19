@@ -2,8 +2,27 @@ import React, { Component } from 'react';
 
 class ProductForm extends Component {
   state = {
-    product: {}
-  };
+    product: {
+      title: '',
+      description: '',
+      price: '',
+      quantity: 0,
+      image: ''
+    }
+};
+  valueChanged = (event) => {
+    const { name, value } = event.target;
+    this.setState((prevState) => ({
+      product: {
+        ...prevState.product,
+        [name]: value
+      }
+    }));
+};
+  formSubmitted = e => {
+    e.preventDefault();
+    console.log(this.state.product);
+  }
   render() {
     const { product } = this.state;
     return (
