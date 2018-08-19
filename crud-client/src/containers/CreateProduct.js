@@ -14,7 +14,7 @@ class CreateProduct extends Component {
   render() {
     return (
       <div>
-        <ProductForm />
+        <ProductForm product={this.state.product} />
       </div>
     );
   }
