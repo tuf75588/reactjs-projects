@@ -31,15 +31,15 @@ You can find the most recent version of this guide [here](https://github.com/fac
   - [Changing the HTML](#changing-the-html)
   - [Adding Assets Outside of the Module System](#adding-assets-outside-of-the-module-system)
   - [When to Use the `public` Folder](#when-to-use-the-public-folder)
-- [Using Global Variables](#using-global-variables)
+- [Using Global letiables](#using-global-letiables)
 - [Adding Bootstrap](#adding-bootstrap)
   - [Using a Custom Theme](#using-a-custom-theme)
 - [Adding Flow](#adding-flow)
 - [Adding a Router](#adding-a-router)
-- [Adding Custom Environment Variables](#adding-custom-environment-variables)
-  - [Referencing Environment Variables in the HTML](#referencing-environment-variables-in-the-html)
-  - [Adding Temporary Environment Variables In Your Shell](#adding-temporary-environment-variables-in-your-shell)
-  - [Adding Development Environment Variables In `.env`](#adding-development-environment-variables-in-env)
+- [Adding Custom Environment letiables](#adding-custom-environment-letiables)
+  - [Referencing Environment letiables in the HTML](#referencing-environment-letiables-in-the-html)
+  - [Adding Temporary Environment letiables In Your Shell](#adding-temporary-environment-letiables-in-your-shell)
+  - [Adding Development Environment letiables In `.env`](#adding-development-environment-letiables-in-env)
 - [Can I Use Decorators?](#can-i-use-decorators)
 - [Fetching Data with AJAX Requests](#fetching-data-with-ajax-requests)
 - [Integrating with an API Backend](#integrating-with-an-api-backend)
@@ -284,7 +284,7 @@ Then add the block below to your `launch.json` file and put it inside the `.vsco
   }]
 }
 ```
->Note: the URL may be different if you've made adjustments via the [HOST or PORT environment variables](#advanced-configuration).
+>Note: the URL may be different if you've made adjustments via the [HOST or PORT environment letiables](#advanced-configuration).
 
 Start your app by running `npm start`, and start debugging in VS Code by pressing `F5` or by clicking the green debug icon. You can now write code, set breakpoints, make changes to the code, and debug your newly modified code—all from your editor.
 
@@ -296,7 +296,7 @@ You would need to have [WebStorm](https://www.jetbrains.com/webstorm/) and [JetB
 
 In the WebStorm menu `Run` select `Edit Configurations...`. Then click `+` and select `JavaScript Debug`. Paste `http://localhost:3000` into the URL field and save the configuration.
 
->Note: the URL may be different if you've made adjustments via the [HOST or PORT environment variables](#advanced-configuration).
+>Note: the URL may be different if you've made adjustments via the [HOST or PORT environment letiables](#advanced-configuration).
 
 Start your app by running `npm start`, then press `^D` on macOS or `F9` on Windows and Linux or click the green debug icon to start debugging in WebStorm.
 
@@ -578,7 +578,7 @@ Then in `package.json`, add the following lines to `scripts`:
 
 Now you can rename `src/App.css` to `src/App.scss` and run `npm run watch-css`. The watcher will find every Sass file in `src` subdirectories, and create a corresponding CSS file next to it, in our case overwriting `src/App.css`. Since `src/App.js` still imports `src/App.css`, the styles become a part of your application. You can now edit `src/App.scss`, and `src/App.css` will be regenerated.
 
-To share variables between Sass files, you can use Sass imports. For example, `src/App.scss` and other component style files could include `@import "./shared.scss";` with variable definitions.
+To share letiables between Sass files, you can use Sass imports. For example, `src/App.scss` and other component style files could include `@import "./shared.scss";` with letiable definitions.
 
 To enable importing files without using relative paths, you can add the  `--include-path` option to the command in `package.json`.
 
@@ -703,7 +703,7 @@ This mechanism provides a number of benefits:
 
 However there is an **escape hatch** that you can use to add an asset outside of the module system.
 
-If you put a file into the `public` folder, it will **not** be processed by Webpack. Instead it will be copied into the build folder untouched.   To reference assets in the `public` folder, you need to use a special variable called `PUBLIC_URL`.
+If you put a file into the `public` folder, it will **not** be processed by Webpack. Instead it will be copied into the build folder untouched.   To reference assets in the `public` folder, you need to use a special letiable called `PUBLIC_URL`.
 
 Inside `index.html`, you can use it like this:
 
@@ -742,19 +742,19 @@ The `public` folder is useful as a workaround for a number of less common cases:
 * You want to include a small script like [`pace.js`](http://github.hubspot.com/pace/docs/welcome/) outside of the bundled code.
 * Some library may be incompatible with Webpack and you have no other option but to include it as a `<script>` tag.
 
-Note that if you add a `<script>` that declares global variables, you also need to read the next section on using them.
+Note that if you add a `<script>` that declares global letiables, you also need to read the next section on using them.
 
-## Using Global Variables
+## Using Global letiables
 
-When you include a script in the HTML file that defines global variables and try to use one of these variables in the code, the linter will complain because it cannot see the definition of the variable.
+When you include a script in the HTML file that defines global letiables and try to use one of these letiables in the code, the linter will complain because it cannot see the definition of the letiable.
 
-You can avoid this by reading the global variable explicitly from the `window` object, for example:
+You can avoid this by reading the global letiable explicitly from the `window` object, for example:
 
 ```js
 const $ = window.$;
 ```
 
-This makes it obvious you are using a global variable intentionally rather than because of a typo.
+This makes it obvious you are using a global letiable intentionally rather than because of a typo.
 
 Alternatively, you can force the linter to ignore any line by adding `// eslint-disable-line` after it.
 
@@ -841,27 +841,27 @@ To try it, delete all the code in `src/App.js` and replace it with any of the ex
 
 Note that [you may need to configure your production server to support client-side routing](#serving-apps-with-client-side-routing) before deploying your app.
 
-## Adding Custom Environment Variables
+## Adding Custom Environment letiables
 
 >Note: this feature is available with `react-scripts@0.2.3` and higher.
 
-Your project can consume variables declared in your environment as if they were declared locally in your JS files. By
-default you will have `NODE_ENV` defined for you, and any other environment variables starting with
+Your project can consume letiables declared in your environment as if they were declared locally in your JS files. By
+default you will have `NODE_ENV` defined for you, and any other environment letiables starting with
 `REACT_APP_`.
 
-**The environment variables are embedded during the build time**. Since Create React App produces a static HTML/CSS/JS bundle, it can’t possibly read them at runtime. To read them at runtime, you would need to load HTML into memory on the server and replace placeholders in runtime, just like [described here](#injecting-data-from-the-server-into-the-page). Alternatively you can rebuild the app on the server anytime you change them.
+**The environment letiables are embedded during the build time**. Since Create React App produces a static HTML/CSS/JS bundle, it can’t possibly read them at runtime. To read them at runtime, you would need to load HTML into memory on the server and replace placeholders in runtime, just like [described here](#injecting-data-from-the-server-into-the-page). Alternatively you can rebuild the app on the server anytime you change them.
 
->Note: You must create custom environment variables beginning with `REACT_APP_`. Any other variables except `NODE_ENV` will be ignored to avoid accidentally [exposing a private key on the machine that could have the same name](https://github.com/facebookincubator/create-react-app/issues/865#issuecomment-252199527). Changing any environment variables will require you to restart the development server if it is running.
+>Note: You must create custom environment letiables beginning with `REACT_APP_`. Any other letiables except `NODE_ENV` will be ignored to avoid accidentally [exposing a private key on the machine that could have the same name](https://github.com/facebookincubator/create-react-app/issues/865#issuecomment-252199527). Changing any environment letiables will require you to restart the development server if it is running.
 
-These environment variables will be defined for you on `process.env`. For example, having an environment
-variable named `REACT_APP_SECRET_CODE` will be exposed in your JS as `process.env.REACT_APP_SECRET_CODE`.
+These environment letiables will be defined for you on `process.env`. For example, having an environment
+letiable named `REACT_APP_SECRET_CODE` will be exposed in your JS as `process.env.REACT_APP_SECRET_CODE`.
 
-There is also a special built-in environment variable called `NODE_ENV`. You can read it from `process.env.NODE_ENV`. When you run `npm start`, it is always equal to `'development'`, when you run `npm test` it is always equal to `'test'`, and when you run `npm run build` to make a production bundle, it is always equal to `'production'`. **You cannot override `NODE_ENV` manually.** This prevents developers from accidentally deploying a slow development build to production.
+There is also a special built-in environment letiable called `NODE_ENV`. You can read it from `process.env.NODE_ENV`. When you run `npm start`, it is always equal to `'development'`, when you run `npm test` it is always equal to `'test'`, and when you run `npm run build` to make a production bundle, it is always equal to `'production'`. **You cannot override `NODE_ENV` manually.** This prevents developers from accidentally deploying a slow development build to production.
 
-These environment variables can be useful for displaying information conditionally based on where the project is
+These environment letiables can be useful for displaying information conditionally based on where the project is
 deployed or consuming sensitive data that lives outside of version control.
 
-First, you need to have environment variables defined. For example, let’s say you wanted to consume a secret defined
+First, you need to have environment letiables defined. For example, let’s say you wanted to consume a secret defined
 in the environment inside a `<form>`:
 
 ```jsx
@@ -877,7 +877,7 @@ render() {
 }
 ```
 
-During the build, `process.env.REACT_APP_SECRET_CODE` will be replaced with the current value of the `REACT_APP_SECRET_CODE` environment variable. Remember that the `NODE_ENV` variable will be set for you automatically.
+During the build, `process.env.REACT_APP_SECRET_CODE` will be replaced with the current value of the `REACT_APP_SECRET_CODE` environment letiable. Remember that the `NODE_ENV` letiable will be set for you automatically.
 
 When you load the app in the browser and inspect the `<input>`, you will see its value set to `abcdef`, and the bold text will show the environment provided when using `npm start`:
 
@@ -890,7 +890,7 @@ When you load the app in the browser and inspect the `<input>`, you will see its
 </div>
 ```
 
-The above form is looking for a variable called `REACT_APP_SECRET_CODE` from the environment. In order to consume this
+The above form is looking for a letiable called `REACT_APP_SECRET_CODE` from the environment. In order to consume this
 value, we need to have it defined in the environment. This can be done using two ways: either in your shell or in
 a `.env` file. Both of these ways are described in the next few sections.
 
@@ -904,11 +904,11 @@ if (process.env.NODE_ENV !== 'production') {
 
 When you compile the app with `npm run build`, the minification step will strip out this condition, and the resulting bundle will be smaller.
 
-### Referencing Environment Variables in the HTML
+### Referencing Environment letiables in the HTML
 
 >Note: this feature is available with `react-scripts@0.9.0` and higher.
 
-You can also access the environment variables starting with `REACT_APP_` in the `public/index.html`. For example:
+You can also access the environment letiables starting with `REACT_APP_` in the `public/index.html`. For example:
 
 ```html
 <title>%REACT_APP_WEBSITE_NAME%</title>
@@ -916,12 +916,12 @@ You can also access the environment variables starting with `REACT_APP_` in the 
 
 Note that the caveats from the above section apply:
 
-* Apart from a few built-in variables (`NODE_ENV` and `PUBLIC_URL`), variable names must start with `REACT_APP_` to work.
-* The environment variables are injected at build time. If you need to inject them at runtime, [follow this approach instead](#generating-dynamic-meta-tags-on-the-server).
+* Apart from a few built-in letiables (`NODE_ENV` and `PUBLIC_URL`), letiable names must start with `REACT_APP_` to work.
+* The environment letiables are injected at build time. If you need to inject them at runtime, [follow this approach instead](#generating-dynamic-meta-tags-on-the-server).
 
-### Adding Temporary Environment Variables In Your Shell
+### Adding Temporary Environment letiables In Your Shell
 
-Defining environment variables can vary between OSes. It’s also important to know that this manner is temporary for the
+Defining environment letiables can lety between OSes. It’s also important to know that this manner is temporary for the
 life of the shell session.
 
 #### Windows (cmd.exe)
@@ -930,7 +930,7 @@ life of the shell session.
 set "REACT_APP_SECRET_CODE=abcdef" && npm start
 ```
 
-(Note: Quotes around the variable assignment are required to avoid a trailing whitespace.)
+(Note: Quotes around the letiable assignment are required to avoid a trailing whitespace.)
 
 #### Windows (Powershell)
 
@@ -944,16 +944,16 @@ set "REACT_APP_SECRET_CODE=abcdef" && npm start
 REACT_APP_SECRET_CODE=abcdef npm start
 ```
 
-### Adding Development Environment Variables In `.env`
+### Adding Development Environment letiables In `.env`
 
 >Note: this feature is available with `react-scripts@0.5.0` and higher.
 
-To define permanent environment variables, create a file called `.env` in the root of your project:
+To define permanent environment letiables, create a file called `.env` in the root of your project:
 
 ```
 REACT_APP_SECRET_CODE=abcdef
 ```
->Note: You must create custom environment variables beginning with `REACT_APP_`. Any other variables except `NODE_ENV` will be ignored to avoid [accidentally exposing a private key on the machine that could have the same name](https://github.com/facebookincubator/create-react-app/issues/865#issuecomment-252199527). Changing any environment variables will require you to restart the development server if it is running.
+>Note: You must create custom environment letiables beginning with `REACT_APP_`. Any other letiables except `NODE_ENV` will be ignored to avoid [accidentally exposing a private key on the machine that could have the same name](https://github.com/facebookincubator/create-react-app/issues/865#issuecomment-252199527). Changing any environment letiables will require you to restart the development server if it is running.
 
 `.env` files **should be** checked into source control (with the exclusion of `.env*.local`).
 
@@ -972,19 +972,19 @@ Files on the left have more priority than files on the right:
 * `npm run build`: `.env.production.local`, `.env.production`, `.env.local`, `.env`
 * `npm test`: `.env.test.local`, `.env.test`, `.env` (note `.env.local` is missing)
 
-These variables will act as the defaults if the machine does not explicitly set them.<br>
+These letiables will act as the defaults if the machine does not explicitly set them.<br>
 Please refer to the [dotenv documentation](https://github.com/motdotla/dotenv) for more details.
 
->Note: If you are defining environment variables for development, your CI and/or hosting platform will most likely need
-these defined as well. Consult their documentation how to do this. For example, see the documentation for [Travis CI](https://docs.travis-ci.com/user/environment-variables/) or [Heroku](https://devcenter.heroku.com/articles/config-vars).
+>Note: If you are defining environment letiables for development, your CI and/or hosting platform will most likely need
+these defined as well. Consult their documentation how to do this. For example, see the documentation for [Travis CI](https://docs.travis-ci.com/user/environment-letiables/) or [Heroku](https://devcenter.heroku.com/articles/config-lets).
 
-#### Expanding Environment Variables In `.env`
+#### Expanding Environment letiables In `.env`
 
 >Note: this feature is available with `react-scripts@1.1.0` and higher.
 
-Expand variables already on your machine for use in your `.env` file (using [dotenv-expand](https://github.com/motdotla/dotenv-expand)).
+Expand letiables already on your machine for use in your `.env` file (using [dotenv-expand](https://github.com/motdotla/dotenv-expand)).
 
-For example, to get the environment variable `npm_package_version`:
+For example, to get the environment letiable `npm_package_version`:
 
 ```
 REACT_APP_VERSION=$npm_package_version
@@ -992,7 +992,7 @@ REACT_APP_VERSION=$npm_package_version
 # REACT_APP_VERSION=${npm_package_version}
 ```
 
-Or expand variables local to the current `.env` file:
+Or expand letiables local to the current `.env` file:
 
 ```
 DOMAIN=www.example.com
@@ -1077,7 +1077,7 @@ If the `proxy` option is **not** flexible enough for you, alternatively you can:
 
 * [Configure the proxy yourself](#configuring-the-proxy-manually)
 * Enable CORS on your server ([here’s how to do it for Express](http://enable-cors.org/server_expressjs.html)).
-* Use [environment variables](#adding-custom-environment-variables) to inject the right server host and port into your app.
+* Use [environment letiables](#adding-custom-environment-letiables) to inject the right server host and port into your app.
 
 ### "Invalid Host Header" Errors After Configuring Proxy
 
@@ -1199,7 +1199,7 @@ Either way, you can proxy WebSocket requests manually in `package.json`:
 
 You may require the dev server to serve pages over HTTPS. One particular case where this could be useful is when using [the "proxy" feature](#proxying-api-requests-in-development) to proxy requests to an API server when that API server is itself serving HTTPS.
 
-To do this, set the `HTTPS` environment variable to `true`, then start the dev server as usual with `npm start`:
+To do this, set the `HTTPS` environment letiable to `true`, then start the dev server as usual with `npm start`:
 
 #### Windows (cmd.exe)
 
@@ -1251,7 +1251,7 @@ You can read more about [zero-configuration pre-rendering (also called snapshott
 
 ## Injecting Data from the Server into the Page
 
-Similarly to the previous section, you can leave some placeholders in the HTML that inject global variables, for example:
+Similarly to the previous section, you can leave some placeholders in the HTML that inject global letiables, for example:
 
 ```js
 <!doctype html>
@@ -1273,7 +1273,7 @@ Create React App uses [Jest](https://facebook.github.io/jest/) as its test runne
 
 Jest is a Node-based runner. This means that the tests always run in a Node environment and not in a real browser. This lets us enable fast iteration speed and prevent flakiness.
 
-While Jest provides browser globals such as `window` thanks to [jsdom](https://github.com/tmpvar/jsdom), they are only approximations of the real browser behavior. Jest is intended to be used for unit tests of your logic and your components rather than the DOM quirks.
+While Jest provides browser globals such as `window` thanks to [jsdom](https://github.com/tmplet/jsdom), they are only approximations of the real browser behavior. Jest is intended to be used for unit tests of your logic and your components rather than the DOM quirks.
 
 We recommend that you use a separate tool for browser end-to-end tests if you need them. They are beyond the scope of Create React App.
 
@@ -1519,11 +1519,11 @@ Example package.json:
 
 ### Continuous Integration
 
-By default `npm test` runs the watcher with interactive CLI. However, you can force it to run tests once and finish the process by setting an environment variable called `CI`.
+By default `npm test` runs the watcher with interactive CLI. However, you can force it to run tests once and finish the process by setting an environment letiable called `CI`.
 
-When creating a build of your application with `npm run build` linter warnings are not checked by default. Like `npm test`, you can force the build to perform a linter warning check by setting the environment variable `CI`. If any warnings are encountered then the build fails.
+When creating a build of your application with `npm run build` linter warnings are not checked by default. Like `npm test`, you can force the build to perform a linter warning check by setting the environment letiable `CI`. If any warnings are encountered then the build fails.
 
-Popular CI servers already set the environment variable `CI` by default but you can do this yourself too:
+Popular CI servers already set the environment letiable `CI` by default but you can do this yourself too:
 
 ### On CI servers
 #### Travis CI
@@ -1598,7 +1598,7 @@ By default, the `package.json` of the generated project looks like this:
     "test": "react-scripts test --env=jsdom"
 ```
 
-If you know that none of your tests depend on [jsdom](https://github.com/tmpvar/jsdom), you can safely remove `--env=jsdom`, and your tests will run faster:
+If you know that none of your tests depend on [jsdom](https://github.com/tmplet/jsdom), you can safely remove `--env=jsdom`, and your tests will run faster:
 
 ```diff
   "scripts": {
@@ -1634,7 +1634,7 @@ If you use [Visual Studio Code](https://code.visualstudio.com), there is a [Jest
 
 ## Debugging Tests
 
-There are various ways to setup a debugger for your Jest tests. We cover debugging in Chrome and [Visual Studio Code](https://code.visualstudio.com/).
+There are letious ways to setup a debugger for your Jest tests. We cover debugging in Chrome and [Visual Studio Code](https://code.visualstudio.com/).
 
 >Note: debugging tests requires Node 8 or higher.
 
@@ -2325,17 +2325,17 @@ Note that in order to support routers that use HTML5 `pushState` API, you may wa
 
 ## Advanced Configuration
 
-You can adjust various development and production settings by setting environment variables in your shell or with [.env](#adding-development-environment-variables-in-env).
+You can adjust letious development and production settings by setting environment letiables in your shell or with [.env](#adding-development-environment-letiables-in-env).
 
-Variable | Development | Production | Usage
+letiable | Development | Production | Usage
 :--- | :---: | :---: | :---
 BROWSER | :white_check_mark: | :x: | By default, Create React App will open the default system browser, favoring Chrome on macOS. Specify a [browser](https://github.com/sindresorhus/opn#app) to override this behavior, or set it to `none` to disable it completely. If you need to customize the way the browser is launched, you can specify a node script instead. Any arguments passed to `npm start` will also be passed to this script, and the url where your app is served will be the last argument. Your script's file name must have the `.js` extension.
-HOST | :white_check_mark: | :x: | By default, the development web server binds to `localhost`. You may use this variable to specify a different host.
-PORT | :white_check_mark: | :x: | By default, the development web server will attempt to listen on port 3000 or prompt you to attempt the next available port. You may use this variable to specify a different port.
+HOST | :white_check_mark: | :x: | By default, the development web server binds to `localhost`. You may use this letiable to specify a different host.
+PORT | :white_check_mark: | :x: | By default, the development web server will attempt to listen on port 3000 or prompt you to attempt the next available port. You may use this letiable to specify a different port.
 HTTPS | :white_check_mark: | :x: | When set to `true`, Create React App will run the development server in `https` mode.
-PUBLIC_URL | :x: | :white_check_mark: | Create React App assumes your application is hosted at the serving web server's root or a subpath as specified in [`package.json` (`homepage`)](#building-for-relative-paths). Normally, Create React App ignores the hostname. You may use this variable to force assets to be referenced verbatim to the url you provide (hostname included). This may be particularly useful when using a CDN to host your application.
+PUBLIC_URL | :x: | :white_check_mark: | Create React App assumes your application is hosted at the serving web server's root or a subpath as specified in [`package.json` (`homepage`)](#building-for-relative-paths). Normally, Create React App ignores the hostname. You may use this letiable to force assets to be referenced verbatim to the url you provide (hostname included). This may be particularly useful when using a CDN to host your application.
 CI | :large_orange_diamond: | :white_check_mark: | When set to `true`, Create React App treats warnings as failures in the build. It also makes the test runner non-watching. Most CIs set this flag by default.
-REACT_EDITOR | :white_check_mark: | :x: | When an app crashes in development, you will see an error overlay with clickable stack trace. When you click on it, Create React App will try to determine the editor you are using based on currently running processes, and open the relevant source file. You can [send a pull request to detect your editor of choice](https://github.com/facebookincubator/create-react-app/issues/2636). Setting this environment variable overrides the automatic detection. If you do it, make sure your systems [PATH](https://en.wikipedia.org/wiki/PATH_(variable)) environment variable points to your editor’s bin folder. You can also set it to `none` to disable it completely.
+REACT_EDITOR | :white_check_mark: | :x: | When an app crashes in development, you will see an error overlay with clickable stack trace. When you click on it, Create React App will try to determine the editor you are using based on currently running processes, and open the relevant source file. You can [send a pull request to detect your editor of choice](https://github.com/facebookincubator/create-react-app/issues/2636). Setting this environment letiable overrides the automatic detection. If you do it, make sure your systems [PATH](https://en.wikipedia.org/wiki/PATH_(letiable)) environment letiable points to your editor’s bin folder. You can also set it to `none` to disable it completely.
 CHOKIDAR_USEPOLLING | :white_check_mark: | :x: | When set to `true`, the watcher runs in polling mode, as necessary inside a VM. Use this option if `npm start` isn't detecting changes.
 GENERATE_SOURCEMAP | :x: | :white_check_mark: | When set to `false`, source maps are not generated for a production build. This solves OOM issues on some smaller machines.
 NODE_PATH | :white_check_mark: |  :white_check_mark: | Same as [`NODE_PATH` in Node.js](https://nodejs.org/api/modules.html#modules_loading_from_the_global_folders), but only relative folders are allowed. Can be handy for emulating a monorepo setup by setting `NODE_PATH=src`.

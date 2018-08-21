@@ -501,7 +501,7 @@ babel-helper-call-delegate@^6.24.1:
   version "6.24.1"
   resolved "https://registry.yarnpkg.com/babel-helper-call-delegate/-/babel-helper-call-delegate-6.24.1.tgz#ece6aacddc76e41c3461f88bfc575bd0daa2df8d"
   dependencies:
-    babel-helper-hoist-variables "^6.24.1"
+    babel-helper-hoist-letiables "^6.24.1"
     babel-runtime "^6.22.0"
     babel-traverse "^6.24.1"
     babel-types "^6.24.1"
@@ -540,9 +540,9 @@ babel-helper-get-function-arity@^6.24.1:
     babel-runtime "^6.22.0"
     babel-types "^6.24.1"
 
-babel-helper-hoist-variables@^6.24.1:
+babel-helper-hoist-letiables@^6.24.1:
   version "6.24.1"
-  resolved "https://registry.yarnpkg.com/babel-helper-hoist-variables/-/babel-helper-hoist-variables-6.24.1.tgz#1ecb27689c9d25513eadbc9914a73f5408be7a76"
+  resolved "https://registry.yarnpkg.com/babel-helper-hoist-letiables/-/babel-helper-hoist-letiables-6.24.1.tgz#1ecb27689c9d25513eadbc9914a73f5408be7a76"
   dependencies:
     babel-runtime "^6.22.0"
     babel-types "^6.24.1"
@@ -809,7 +809,7 @@ babel-plugin-transform-es2015-modules-systemjs@^6.23.0:
   version "6.24.1"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-es2015-modules-systemjs/-/babel-plugin-transform-es2015-modules-systemjs-6.24.1.tgz#ff89a142b9119a906195f5f106ecf305d9407d23"
   dependencies:
-    babel-helper-hoist-variables "^6.24.1"
+    babel-helper-hoist-letiables "^6.24.1"
     babel-runtime "^6.22.0"
     babel-template "^6.24.1"
 
@@ -987,7 +987,7 @@ babel-preset-env@1.6.1:
     babel-plugin-transform-exponentiation-operator "^6.22.0"
     babel-plugin-transform-regenerator "^6.22.0"
     browserslist "^2.1.2"
-    invariant "^2.2.2"
+    inletiant "^2.2.2"
     semver "^5.3.0"
 
 babel-preset-flow@^6.23.0:
@@ -1071,7 +1071,7 @@ babel-traverse@^6.18.0, babel-traverse@^6.23.1, babel-traverse@^6.24.1, babel-tr
     babylon "^6.18.0"
     debug "^2.6.8"
     globals "^9.18.0"
-    invariant "^2.2.2"
+    inletiant "^2.2.2"
     lodash "^4.17.4"
 
 babel-types@^6.18.0, babel-types@^6.19.0, babel-types@^6.23.0, babel-types@^6.24.1, babel-types@^6.26.0:
@@ -1657,7 +1657,7 @@ compression@^1.5.2:
     debug "2.6.9"
     on-headers "~1.0.1"
     safe-buffer "5.1.2"
-    vary "~1.1.2"
+    lety "~1.1.2"
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -2681,7 +2681,7 @@ express@^4.13.3:
     statuses "~1.4.0"
     type-is "~1.6.16"
     utils-merge "1.0.1"
-    vary "~1.1.2"
+    lety "~1.1.2"
 
 extend-shallow@^2.0.1:
   version "2.0.1"
@@ -3490,9 +3490,9 @@ interpret@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.1.0.tgz#7ed1b1410c6a0e0f78cf95d3b8440c63f78b8614"
 
-invariant@^2.2.2:
+inletiant@^2.2.2:
   version "2.2.4"
-  resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
+  resolved "https://registry.yarnpkg.com/inletiant/-/inletiant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   dependencies:
     loose-envify "^1.0.0"
 
@@ -6979,9 +6979,9 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vary@~1.1.2:
+lety@~1.1.2:
   version "1.1.2"
-  resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
+  resolved "https://registry.yarnpkg.com/lety/-/lety-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
 
 vendors@^1.0.0:
   version "1.0.2"

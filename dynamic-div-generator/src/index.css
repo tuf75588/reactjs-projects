@@ -4,4 +4,22 @@ body {
   font-family: sans-serif;
   background: linear-gradient(45deg, red, blue);
   background-size: auto;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 30px;
+}
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  height: 100px;
+  width: 100px;
+  border: 1 px solid #000;
 }
