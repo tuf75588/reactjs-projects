@@ -1,0 +1,88 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  height: 100vh;
+  background: linear-gradient(270deg, #1121d1, #ff0030);
+  background-size: 400% 400%;
+
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
+
+  @-webkit-keyframes AnimationName {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  @-moz-keyframes AnimationName {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  @keyframes AnimationName {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
+.header {
+  margin: 0 auto;
+}
+.header h1 {
+  text-align: center;
+  color: #fff;
+}
+.search-container {
+  display: flex;
+  justify-content: center;
+}
+.search-container input {
+  padding: 10px;
+  margin: 2em;
+  border: none;
+  border-radius: 5px;
+  background: #1e1e1e;
+  color: #67d5b5;
+  font-size: 20px;
+}
+.tableContainer {
+  display: flex;
+  justify-content: center;
+}
+.tableData {
+  font-size: 18px;
+}
+.tableData thead th {
+  padding: 2.5em;
+  color: #ff7473;
+  border-bottom: 1px solid #ffc952;
+}
+.tableData td {
+  text-align: center;
+  color: #191970;
+}
+.data:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
