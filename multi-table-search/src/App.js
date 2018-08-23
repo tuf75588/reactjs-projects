@@ -14,9 +14,22 @@ class App extends Component {
       }));
     });
   }
+  handleInputSearch = searchTerm => {
+    const original = [...this.state.data];
+    const { data } = this.state;
+    if (searchTerm.length > 0) {
+      const check = data.filter((element, index, array) => {
+        const regex = new RegExp(searchTerm, "gi");
+        const check = element.name.official.match(regex);
+        return check;
+      });
+      this.setState(() => ({
+        data: check
+      }));
+    }
+  };
   render() {
     const tableFileds = this.state.data.map((element, index) => {
-      console.log(element);
       const capital = element.capital[0];
       const officialName = element.name.official;
       const region = element.region;
@@ -24,7 +37,7 @@ class App extends Component {
       const lat = element.latlng[0];
       const lng = element.latlng[1];
       return (
-        <tr className="data">
+        <tr className="data" key={index}>
           <td>{officialName}</td>
           <td>{capital}</td>
           <td>{region}</td>
@@ -37,7 +50,7 @@ class App extends Component {
     return (
       <div className="container">
         <Header title="Country/Capital Data Multi-Search Service" />
-        <SearchFields />
+        <SearchFields handleInputSearch={this.handleInputSearch} />
         <div className="tableContainer">
           <table className="tableData">
             <thead>

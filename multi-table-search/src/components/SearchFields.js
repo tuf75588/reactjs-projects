@@ -8,11 +8,15 @@ class SearchFields extends Component {
     subregion: ""
   };
   handleChange = event => {
-    const { name, value } = event.target;
-    this.setState(() => ({
-      [name]: value
+    const fields = this.state;
+    const { name } = event.target;
+    fields[event.target.name] = event.target.value;
+    this.setState(prevState => ({
+      prevState: fields
     }));
+    this.props.handleInputSearch(event.target.value.toLowerCase());
   };
+
   render() {
     return (
       <div className="search-container">
