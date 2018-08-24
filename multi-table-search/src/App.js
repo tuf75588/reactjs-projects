@@ -18,16 +18,18 @@ class App extends Component {
     return fetch(API_URL)
       .then(res => res.json())
       .then(result => {
-        console.log(result);
-        let data = {};
+        let data = result.map((element, indx, arr) => {
+          return {
+            country: element.name.official,
+            capital: element.capital[0],
+            region: element.region,
+            subregion: element.subregion,
+            lat: element.latlng[0],
+            lng: element.latlng[1]
+          };
+        });
         this.setState(() => ({
-          data: result.map((element, index, array) => {
-            data.name = element.name.official;
-            data.capital = element.capital[0];
-            data.region = element.region;
-            data.subregion = element.subregion;
-            return data;
-          })
+          data
         }));
       });
   };
@@ -51,9 +53,9 @@ class App extends Component {
   };
   handleSubregionChange = e => {
     const val = e.target.value;
-    this.setState(() => {
-      subregion: val;
-    });
+    this.setState(() => ({
+      subregion: val
+    }));
   };
   render() {
     return (
@@ -84,10 +86,16 @@ class App extends Component {
             type="text"
             name="subregion"
             placeholder="Filter by Subregion"
-            onChange={this.handleRegionChange}
+            onChange={this.handleSubregionChange}
           />
         </div>
-        <RenderList data={this.state.data} />
+        <RenderList
+          data={this.state.data}
+          country={this.state.country}
+          capital={this.state.capital}
+          region={this.state.region}
+          subregion={this.state.subregion}
+        />
       </div>
     );
   }

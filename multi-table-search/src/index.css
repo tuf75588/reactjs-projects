@@ -74,7 +74,7 @@ body {
 }
 .tableData thead th {
   padding: 2.5em;
-  color: #ff7473;
+  color: #000;
   border-bottom: 1px solid #ffc952;
 }
 .tableData td {
