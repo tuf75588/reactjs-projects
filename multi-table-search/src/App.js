@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import RenderList from "./components/RenderList";
 
 class App extends Component {
   state = {
@@ -30,8 +31,65 @@ class App extends Component {
         }));
       });
   };
+  handleCountryChange = e => {
+    const val = e.target.value;
+    this.setState(() => ({
+      country: val
+    }));
+  };
+  handleCapitalChange = e => {
+    const val = e.target.value;
+    this.setState(() => ({
+      capital: val
+    }));
+  };
+  handleRegionChange = e => {
+    const val = e.target.value;
+    this.setState(() => ({
+      region: val
+    }));
+  };
+  handleSubregionChange = e => {
+    const val = e.target.value;
+    this.setState(() => {
+      subregion: val;
+    });
+  };
   render() {
-    return <div>hi</div>;
+    return (
+      <div className="container">
+        <div className="header">
+          <h1>Table Search</h1>
+        </div>
+        <div className="search-container">
+          <input
+            type="text"
+            name="country"
+            placeholder="Filter by Country"
+            onChange={this.handleCountryChange}
+          />
+          <input
+            type="text"
+            name="capital"
+            placeholder="Filter by Capital"
+            onChange={this.handleCapitalChange}
+          />
+          <input
+            type="text"
+            name="region"
+            placeholder="Filter by Region"
+            onChange={this.handleRegionChange}
+          />
+          <input
+            type="text"
+            name="subregion"
+            placeholder="Filter by Subregion"
+            onChange={this.handleRegionChange}
+          />
+        </div>
+        <RenderList data={this.state.data} />
+      </div>
+    );
   }
 }
 
