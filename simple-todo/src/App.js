@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import styled from "react-emotion";
 import NewTodo from "./components/NewTodo";
+import RenderList from "./components/NewTodo";
 
 const TodoContainer = styled("main")`
   min-width: 600px;
@@ -54,16 +55,45 @@ class App extends Component {
         title: "Make Dinner",
         id: generateId()
       }
-    ]
+    ],
+    todoTitle: "",
+    search: ""
   };
-  addTodo = todo => {
-    const newTodo = {};
-    newTodo.title = todo;
-    newTodo.id = generateId();
-    this.setState(prevState => ({
-      todos: [...prevState.todos, newTodo]
+  handleNewTodoTitle = event => {
+    const val = event.target.value;
+    this.setState(() => ({
+      todoTitle: val
     }));
   };
+  handleSubmit = event => {
+    event.preventDefault();
+    this.addTodo(this.state.todoTitle);
+  };
+  addTodo = searchTerm => {
+    const newState = {};
+    newState.id = generateId();
+    newState.title = searchTerm;
+    this.setState(prevState => ({
+      todos: [...prevState.todos, newState],
+      todoTitle: ""
+    }));
+  };
+
+  handleFilterChange = event => {
+    const val = event.target.value.trim().toLowerCase();
+    if (val.length > 0) {
+      this.setState(() => ({
+        search: val,
+        todos: this.state.todos.filter((todo, indx) => {
+          return todo.title
+            .trim()
+            .toLowerCase()
+            .match(val);
+        })
+      }));
+    }
+  };
+
   render() {
     const { todos } = this.state;
     return (
@@ -72,18 +102,32 @@ class App extends Component {
           <TodoContainer>
             <Header>
               <h1>React Todo App</h1>
-              <h3>Increase Your Productivity</h3>
             </Header>
-            <NewTodo addTodo={this.addTodo} />
+            <div className="todo-control">
+              <form onSubmit={this.handleSubmit}>
+                <input
+                  type="text"
+                  name="newTodo"
+                  placeholder="Enter todo.."
+                  onChange={this.handleNewTodoTitle}
+                  value={this.state.todoTitle}
+                />
+              </form>
+              <form onSubmit={this.handleSubmit}>
+                <button className="btn-submit">Create Todo</button>
+              </form>
+              <form>
+                <input
+                  type="text"
+                  name="filter"
+                  placeholder="Filter todos.."
+                  onChange={this.handleFilterChange}
+                />
+              </form>
+            </div>
             <ul>
-              {todos.map((todo, index) => {
-                return (
-                  <div className="list">
-                    <span className="task">Task #{index + 1}</span>
-                    <li>{todo.title}</li>
-                    <span className="delete">X</span>
-                  </div>
-                );
+              {todos.map((element, index) => {
+                return <RenderList index={index} title={element.title} />;
               })}
             </ul>
           </TodoContainer>

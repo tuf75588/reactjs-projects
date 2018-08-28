@@ -1,41 +1,13 @@
-import React, { Component } from "react";
-import { generateId } from "../App";
+import React from "react";
 
-class NewTodo extends Component {
-  state = {
-    todoTitle: ""
-  };
-  handleTitleChange = event => {
-    const val = event.target.value;
-    this.setState(() => ({
-      todoTitle: val
-    }));
-  };
-  handleSubmit = event => {
-    event.preventDefault();
-    const { todoTitle } = this.state;
-    this.props.addTodo(todoTitle);
-  };
+const RenderList = props => {
+  return (
+    <div className="list">
+      <span className="task">Task #{props.index + 1}</span>
+      <li>{props.title}</li>
+      <span className="delete">X</span>
+    </div>
+  );
+};
 
-  render() {
-    return (
-      <div className="todo-control">
-        <form>
-          <input
-            type="text"
-            name="newTodo"
-            placeholder="Enter todo.."
-            onChange={this.handleTitleChange}
-          />
-        </form>
-        <form onSubmit={this.handleSubmit}>
-          <button className="btn-submit">Create Todo</button>
-        </form>
-        <form>
-          <input type="text" name="filter" placeholder="Filter todos.." />
-        </form>
-      </div>
-    );
-  }
-}
-export default NewTodo;
+export default RenderList;
