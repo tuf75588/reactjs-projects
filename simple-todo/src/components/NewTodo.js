@@ -5,7 +5,9 @@ const RenderList = props => {
     <div className="list">
       <span className="task">Task #{props.index + 1}</span>
       <li>{props.title}</li>
-      <span className="delete">X</span>
+      <span className="delete" onClick={() => props.delete(props.id)}>
+        X
+      </span>
     </div>
   );
 };

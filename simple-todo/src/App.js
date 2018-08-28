@@ -78,24 +78,35 @@ class App extends Component {
       todoTitle: ""
     }));
   };
-
-  handleFilterChange = event => {
-    const val = event.target.value.trim().toLowerCase();
-    if (val.length > 0) {
-      this.setState(() => ({
-        search: val,
-        todos: this.state.todos.filter((todo, indx) => {
-          return todo.title
-            .trim()
-            .toLowerCase()
-            .match(val);
-        })
-      }));
-    }
+  handleFilterInput = event => {
+    const filterTerm = event.target.value;
+    this.setState(() => ({
+      search: filterTerm
+    }));
   };
-
+  handleDelete = id => {
+    this.setState(() => ({
+      todos: this.state.todos.filter(todo => todo.id !== id)
+    }));
+  };
   render() {
-    const { todos } = this.state;
+    let { todos, search } = this.state;
+    if (search.length > 0) {
+      todos = todos.filter((element, index) => {
+        return element.title.toLowerCase().match(search);
+      });
+    }
+    const items = todos.map((todo, indx) => {
+      return (
+        <RenderList
+          title={todo.title}
+          index={indx}
+          id={todo.id}
+          key={todo.id}
+          delete={this.handleDelete}
+        />
+      );
+    });
     return (
       <div className="App">
         <div className="container">
@@ -121,15 +132,11 @@ class App extends Component {
                   type="text"
                   name="filter"
                   placeholder="Filter todos.."
-                  onChange={this.handleFilterChange}
+                  onChange={this.handleFilterInput}
                 />
               </form>
             </div>
-            <ul>
-              {todos.map((element, index) => {
-                return <RenderList index={index} title={element.title} />;
-              })}
-            </ul>
+            {items}
           </TodoContainer>
         </div>
       </div>
