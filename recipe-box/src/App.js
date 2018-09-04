@@ -25,10 +25,12 @@ import './index.css';
     addNewRecipe = (name, ingredients) => {
       const newRecipe = {
         name,
-        ...ingredients,
+        ingredients: [...ingredients.split(',')],
       }
-      this.setState((prevState)  => console.log(prevState) || ({
-          recipes: [...prevState.recipes, newRecipe.name]
+     
+      this.setState((prevState) => ({
+        recipes: [...prevState.recipes, newRecipe],
+        showAddRecipe: false,
       }))
       
     }

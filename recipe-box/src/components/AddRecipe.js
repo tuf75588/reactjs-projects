@@ -23,7 +23,9 @@ class RecipeForm extends Component {
 
   addRecipe =  () => {
       const { ingredients, recipeName } = this.state;
-      this.props.addNewRecipe(recipeName, ...ingredients)
+      const formattedIngredients = ingredients.split(' ').join(' ')
+      console.log(formattedIngredients);
+      this.props.addNewRecipe(recipeName, formattedIngredients)
   }
 
   render() {
@@ -42,7 +44,7 @@ class RecipeForm extends Component {
             </FormGroup>
           </Modal.Body>
           <Button>Close</Button>
-          <Button >Submit Recipe</Button>
+          <Button onClick={this.addRecipe}>Submit Recipe</Button>
         </Modal.Header>
       </Modal>
     );
