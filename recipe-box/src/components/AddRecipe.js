@@ -27,7 +27,8 @@ class RecipeForm extends Component {
       console.log(formattedIngredients);
       this.props.addNewRecipe(recipeName, formattedIngredients)
   }
-
+  
+ 
   render() {
  
     return (
@@ -38,9 +39,9 @@ class RecipeForm extends Component {
             {' '}
             <FormGroup >
                 <ControlLabel>Recipe Name</ControlLabel>
-              <FormControl name='recipeName' type="text" onChange={this.handleRecipeChange} placeholder="Recipe Name.." />
+              <FormControl name='recipeName'  type="text" onChange={this.handleRecipeChange} placeholder="Recipe Name.." />
               <ControlLabel style={{marginTop: '1em'}}>Recipe Ingredients</ControlLabel>
-              <FormControl componentClass="textarea" onChange={this.handleRecipeChange} name='ingredients' placeholder="Ingredients (seperated by commas)" />
+              <FormControl componentClass="textarea" onChange={this.handleRecipeChange}  name='ingredients' placeholder="Ingredients (seperated by commas)" />
             </FormGroup>
           </Modal.Body>
           <Button>Close</Button>
