@@ -65,7 +65,7 @@ class App extends React.Component {
   };
   handleEditClick = index => {
     //handle user clicking on edit button
-    const { recipes } = this.state;
+    
     this.setState(() => ({
       showEditForm: !this.state.showEditForm,
       currentlyEditing: index
