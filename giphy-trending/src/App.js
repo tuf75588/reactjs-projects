@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import config from './config';
 import GifGrid from './components/GifGrid';
+import ButtonRow from './components/ButtonRow';
 
 class App extends Component {
   state = {
@@ -30,6 +31,9 @@ class App extends Component {
     return (
       <div className="container">
         <h1>Trending GIFS from GIPHY!</h1>
+        <div className='btn-row'>
+          <ButtonRow />
+        </div>
         <section className="gif-container">
           {gifGrid}
         </section>

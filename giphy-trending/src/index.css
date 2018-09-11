@@ -8,15 +8,27 @@ body {
 }
 h1 {
   text-align: center;
+  margin-bottom: 5em;
 }
 
 .gif-container {
   margin: 0 auto;
+  width: 85vw;
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
   border: 7px solid #551a8b;
+}
+.btn-row {
+  text-align: center;
 
- 
- 
+}
+.btn-row button {
+  margin: 1em;
+  background: navy;
+  color: #FFF;
+  border: none;
+  padding: 0.75em;
+  border-radius: 5px;
+  font-size: 1.5rem;
 }
