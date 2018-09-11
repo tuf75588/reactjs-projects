@@ -21,14 +21,14 @@ h1 {
 }
 .btn-row {
   text-align: center;
-
 }
 .btn-row button {
   margin: 1em;
   background: navy;
-  color: #FFF;
+  color: #fff;
   border: none;
   padding: 0.75em;
   border-radius: 5px;
   font-size: 1.5rem;
+  cursor: pointer;
 }

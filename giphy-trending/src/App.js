@@ -5,38 +5,64 @@ import ButtonRow from './components/ButtonRow';
 
 class App extends Component {
   state = {
-    gifs: null,
-    loading: true
+    gifs: [],
+    copy: [],
+    loading: true,
+    loadingNewGifs: false,
   };
-  componentDidMount() {
-    return fetch(config.endpoint)
+  fetchData = () => {
+    fetch(config.endpoint)
       .then(data => data.json())
       .then(results => {
-        console.log(results);
         this.setState(() => ({
-          gifs: results.data.map((element, index,array) => {
-            return element.images.fixed_height.url
+          gifs: results.data.map((element, index, array) => {
+            return element.images.fixed_height.url;
+          }),
+          copy: results.data.map((element, index, array) => {
+            return element.images.fixed_height.url;
           }),
           loading: false,
-        }))
+         
+        }));
       });
+  }
+
+  componentDidMount() {
+    this.loadingGifs = this.fetchData()
+  }
+ 
+  handleClearClick = () => {
+    this.setState(() => ({
+      gifs: [],
+      loadingNewGifs: false,
+    }));
+   
+  };
+  handleLoadClick = () => {
+    const { copy } = this.state;
+    this.setState(() => ({
+      loadingNewGifs: true,
+    }))
+    this.fetchData()
   }
   render() {
     const { gifs, loading } = this.state;
-    const gifGrid = loading ? <h2>Fetching dank memes</h2> : gifs.map((gif, indx, arr) => {
-      return (
-        <GifGrid gifs={gif}/>
-      )
-    })
-    return (
+    const data = this.state.loadingNewGifs && (
+        this.state.gifs.map((gif, index) => {
+          return (
+            <GifGrid gifs={gif} index={index} />
+          )
+        })
+    )
+        return (
       <div className="container">
         <h1>Trending GIFS from GIPHY!</h1>
-        <div className='btn-row'>
-          <ButtonRow />
+        <div className="btn-row">
+          <ButtonRow  onClear={this.handleClearClick} loadGifs={this.handleLoadClick}/>
         </div>
-        <section className="gif-container">
-          {gifGrid}
-        </section>
+          <section className='gif-container' style={{border: !this.state.loadingNewGifs ? 'none' : ''}}>
+            {data}
+            </section>
       </div>
     );
   }
