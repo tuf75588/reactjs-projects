@@ -6,6 +6,7 @@ import ButtonRow from './components/ButtonRow';
 class App extends Component {
   state = {
     gifs: [],
+    randomGif: [],
     loading: true,
     loadingNewGifs: false
   };
@@ -17,16 +18,13 @@ class App extends Component {
           gifs: results.data.map((element, index, array) => {
             return element.images.fixed_height.url;
           }),
-          copy: results.data.map((element, index, array) => {
-            return element.images.fixed_height.url;
-          }),
-          loading: false
+      loading: false
         }));
       });
   };
 
   componentDidMount() {
-   this.fetchData();
+    this.fetchData();
   }
 
   handleClearClick = () => {
@@ -43,13 +41,11 @@ class App extends Component {
   };
   getRandomGif = () => {
     const data = [...this.state.gifs];
-    const randomIndex = Math.floor(Math.random() * data.length);
-    const randomGifSelection = data.find(
-      (element, index, array) => index === randomIndex
-    );
+    const random = data[Math.floor(Math.random() * data.length)];
     this.setState(() => ({
-      gifs: [randomGifSelection],
-    }));
+      gifs: [random],
+    }))
+    console.log(this.state.randomGif);
   };
 
   render() {
