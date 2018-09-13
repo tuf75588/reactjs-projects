@@ -5,8 +5,8 @@ import ButtonRow from './components/ButtonRow';
 
 class App extends Component {
   state = {
-    gifs: [],
-    randomGif: [],
+    data: [],
+    copy: [],
     loading: true,
     loadingNewGifs: false
   };
@@ -15,10 +15,13 @@ class App extends Component {
       .then(data => data.json())
       .then(results => {
         this.setState(() => ({
-          gifs: results.data.map((element, index, array) => {
+          data: results.data.map((element, index, array) => {
             return element.images.fixed_height.url;
           }),
-      loading: false
+          loading: false,
+          copy: results.data.map((element, index, array) => {
+            return element.images.fixed_height.url;
+          })
         }));
       });
   };
@@ -29,7 +32,7 @@ class App extends Component {
 
   handleClearClick = () => {
     this.setState(() => ({
-      gifs: [],
+      data: [],
       loadingNewGifs: false
     }));
   };
@@ -39,20 +42,29 @@ class App extends Component {
     }));
     this.fetchData();
   };
-  getRandomGif = () => {
-    const data = [...this.state.gifs];
-    const random = data[Math.floor(Math.random() * data.length)];
+  getRandomGif = event => {
+    const stateCopy = [...this.state.copy];
+    const copyLength = stateCopy.length;
+    const random = [stateCopy[Math.floor(Math.random() * copyLength)]];
     this.setState(() => ({
-      gifs: [random],
-    }))
-    console.log(this.state.randomGif);
+      data: random,
+    }));
   };
 
+  randomizeOrder = () => {
+    const stateCopy = [...this.state.data];
+    this.setState(() => ({
+      data: stateCopy.sort(() => {
+        return 0.5 - Math.random()
+      })
+    }))
+  }
+
   render() {
-    const { gifs, loading } = this.state;
-    const data =
+    const { data, loading } = this.state;
+    const info =
       this.state.loadingNewGifs &&
-      this.state.gifs.map((gif, index) => {
+      this.state.data.map((gif, index) => {
         return <GifGrid gifs={gif} index={index} />;
       });
     return (
@@ -63,13 +75,14 @@ class App extends Component {
             onClear={this.handleClearClick}
             loadGifs={this.handleLoadClick}
             randomGif={this.getRandomGif}
+            randomize={this.randomizeOrder}
           />
         </div>
         <section
           className="gif-container"
           style={{ border: !this.state.loadingNewGifs ? 'none' : '' }}
         >
-          {data}
+          {info}
         </section>
       </div>
     );
